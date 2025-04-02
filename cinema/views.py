@@ -76,7 +76,7 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
     def _params_to_ints(query_string):
         return [
             int(str_id) for str_id in query_string.split(",")
-            if query_string.isdigit()
+            if str_id.isdigit()
         ]
 
     def get_serializer_class(self):
@@ -100,7 +100,7 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
 
         if date:
             parsed_date = parse_date(date)
-            if date:
+            if parsed_date:
                 queryset = queryset.filter(show_time__date=parsed_date)
 
         if self.action in "list":
